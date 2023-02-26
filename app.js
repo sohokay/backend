@@ -9,14 +9,14 @@ var LocalStrategy = require('passport-local'); //require passport-local strategy
 var passportLocalMongoose = require('passport-local-mongoose'); //require passport-local-mongoose for authentication
 var User = require('./models/user'); //require user model from models/user.js
 
-mongoose.connect('mongodb://localhost/auth_demo_app'); //connect to database auth_demo_app
+mongoose.connect('mongodb://119.91.252.27/auth_demo_app'); //connect to database auth_demo_app
 
 // example of using a middleware
 // app.use(function(req, res, next){
 //     console.log('I run for all routes');
 //     next();
 // });
-app.set('view engine', 'ejs'); //set view engine to ejs, so we don't have to type .ejs in our render method calls in our routes file (app.js)
+// app.set('view engine', 'ejs'); //set view engine to ejs, so we don't have to type .ejs in our render method calls in our routes file (app.js)
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(require('express-session')({ //express-session is a function that returns a middleware
 
@@ -40,23 +40,19 @@ passport.use(new LocalStrategy(User.authenticate())); //authenticate using local
 //================
 
 app.get('/', function (req, res) { //root route (home page)
-  res.render('home'); //render home.ejs file in views folder (home page)
-
+  // return json
+  res.json({
+    message: 'Welcome to the coolest API on earth!'
+  } );
 });
 
 app.get('/secret', isLoggedIn, function (req, res) { //secret route (secret page)
-  res.render('secret'); //render secret.ejs file in views folder (secret page)
-  x
+ res.json({
+    message: 'Welcome to the coolest API on earth!'
+ }  );
 });
 
 //Auth Routes
-
-//show sign up form
-app.get('/register', function (req, res) { //register route (register page) (get request)
-  res.render('register'); //render register.ejs file in views folder (register page) (get request)
-
-});
-
 //handling user sign up
 app.post('/register', function (req, res) { //register route (register page) (post request)
   User.register(new User({username: req.body.username}), req.body.password, function (err, user) { //register new user with username and password (post request)
@@ -71,10 +67,6 @@ app.post('/register', function (req, res) { //register route (register page) (po
 });
 
 //LOGIN ROUTES
-//render login form
-app.get('/login', function (req, res) { //login route (login page)
-  res.render('login'); //render login.ejs file in views folder (login page)
-});
 
 //login logic
 //middleware
@@ -88,20 +80,21 @@ app.post('/login', passport.authenticate('local', {
 
 app.get('/logout', function (req, res) {
   req.logout();
-  res.redirect('/');
-
-
+  res.json({
+    message: " You are logged out."
+  } );
 });
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect('/login');
-
+  res.json({
+    message: "You need to be logged in to see this."
+  } );
 }
 
-app.listen(process.env.PORT, process.env.IP, function () {
+app.listen(process.env.PORT||3000,'', function () {
   console.log('Server has started');
 
 
