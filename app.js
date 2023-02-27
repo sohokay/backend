@@ -40,16 +40,16 @@ passport.use(new LocalStrategy(User.authenticate())); //authenticate using local
 //================
 
 app.get('/', function (req, res) { //root route (home page)
-  // return json
+                                   // return json
   res.json({
     message: 'Welcome to the coolest API on earth!'
-  } );
+  });
 });
 
 app.get('/secret', isLoggedIn, function (req, res) { //secret route (secret page)
- res.json({
+  res.json({
     message: 'Welcome to the coolest API on earth!'
- }  );
+  });
 });
 
 //Auth Routes
@@ -58,11 +58,10 @@ app.post('/register', function (req, res) { //register route (register page) (po
   User.register(new User({username: req.body.username}), req.body.password, function (err, user) { //register new user with username and password (post request)
     if (err) { //if there is an error
       console.log(err); //log the error
-      return res.render('register'); //render register.ejs file in views folder (register page)
+      return res.json({
+        message: err
+      } );
     }
-    passport.authenticate('local')(req, res, function () { //authenticate using local strategy
-      res.redirect('/secret'); //redirect to secret page
-    });
   });
 });
 
@@ -70,11 +69,11 @@ app.post('/register', function (req, res) { //register route (register page) (po
 
 //login logic
 //middleware
-app.post('/login', passport.authenticate('local', {
-  successRedirect: '/secret',
-  failureRedirect: '/login'
-}), function (req, res) { //callback function
-
+app.post('/login', passport.authenticate('local',{}), function (req, res) { //callback function
+  console.log(req);
+  res.json({
+    message: "You are logged in."
+  });
 
 });
 
@@ -82,8 +81,15 @@ app.get('/logout', function (req, res) {
   req.logout();
   res.json({
     message: " You are logged out."
-  } );
+  });
 });
+
+
+app.get('/api',isLoggedIn, function (req, res) {
+  res.json({
+    message: 'Welcome to the coolest API on earth!'
+  });
+})
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
@@ -91,10 +97,10 @@ function isLoggedIn(req, res, next) {
   }
   res.json({
     message: "You need to be logged in to see this."
-  } );
+  });
 }
 
-app.listen(process.env.PORT||3000,'', function () {
+app.listen(process.env.PORT || 3000, '', function () {
   console.log('Server has started');
 
 
