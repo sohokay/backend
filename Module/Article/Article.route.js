@@ -1,8 +1,8 @@
-const express = require('express');
+import express from 'express';
 const router = express.Router();
-const {authenticate} = require('../../middleware/passport');
-const ArticleController = require('./Article.controller');
-const {checkArticle} = require("./Article.middleware");
+import {authenticate} from '../../middleware/passport';
+import ArticleController from './Article.controller';
+import {checkArticle} from './Article.middleware';
 // 获取所有文章
 router.get('/', authenticate, (req, res, next) => ArticleController.getAll(req, res, next));
 
@@ -18,4 +18,4 @@ router.put('/:id', authenticate,checkArticle, (req, res, next) => ArticleControl
 // 删除文章
 router.delete('/:id', authenticate,checkArticle, (req, res, next) => ArticleController.deleteById(req, res, next));
 
-module.exports = router;
+export default router;

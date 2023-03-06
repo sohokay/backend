@@ -1,10 +1,10 @@
 // albumController.js
 
-const Album = require('./Album.model');
-const Article = require('../Article/Article.model');
+import Album from './Album.model';
+import Article from '../Article/Article.model';
 
 // 创建专辑
-exports.createAlbum = async (req, res) => {
+export const createAlbum = async (req, res) => {
   const {name, coverImage, description} = req.body;
   const createdBy = req.user._id;
 
@@ -17,7 +17,7 @@ exports.createAlbum = async (req, res) => {
 };
 
 // 获取所有专辑
-exports.getAllAlbums = async (req, res) => {
+export const getAllAlbums = async (req, res) => {
   try {
     const albums = await Album.find({createdBy: req.user._id});
     res.json(albums);
@@ -27,11 +27,11 @@ exports.getAllAlbums = async (req, res) => {
 }
 
 // 获取单个专辑
-exports.getAlbumById = async (req, res) => {
+export const getAlbumById = async (req, res) => {
   try {
     const album = await Album.findById(req.params.id)
-        .populate('creator', 'username') // 关联查询专辑创建者的username字段
-        .populate('articles', 'title') // 关联查询专辑包含的文章的title字段
+      .populate('creator', 'username') // 关联查询专辑创建者的username字段
+      .populate('articles', 'title') // 关联查询专辑包含的文章的title字段
 
     if (!album) {
       return res.status(404).json({message: 'Album not found'});
@@ -45,15 +45,15 @@ exports.getAlbumById = async (req, res) => {
 
 
 // 修改专辑
-exports.updateAlbum = async (req, res) => {
+export const updateAlbum = async (req, res) => {
   const {name, coverImage, description} = req.body;
   const albumId = req.params.id;
 
   try {
     const album = await Album.findOneAndUpdate(
-        {_id: albumId, createdBy: req.user._id},
-        {name, coverImage, description},
-        {new: true}
+      {_id: albumId, createdBy: req.user._id},
+      {name, coverImage, description},
+      {new: true}
     );
 
     if (!album) {
@@ -67,7 +67,7 @@ exports.updateAlbum = async (req, res) => {
 };
 
 // 删除专辑
-exports.deleteAlbum = async (req, res) => {
+export const deleteAlbum = async (req, res) => {
   const albumId = req.params.id;
 
   try {
@@ -84,17 +84,15 @@ exports.deleteAlbum = async (req, res) => {
 };
 
 // 添加文章到专辑中
-exports.addArticleToAlbum = async (req, res) => {
+export const addArticleToAlbum = async (req, res) => {
   const {articleId} = req.body;
   const albumId = req.params.id;
 
   try {
     const album = await Album.findOneAndUpdate(
-        {_id: albumId, createdBy: req.user._id},
-        {
-          $push: {articles: articleId}
-        },
-        {new: true}
+      {_id: albumId, createdBy: req.user._id},
+      {$push: {articles: articleId}},
+      {new: true}
     );
 
     if (!album) {

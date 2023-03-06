@@ -1,6 +1,7 @@
 // 查找是否存在和鉴权 统一处理
-const Article = require("./Article.model");
-exports.checkArticle = async (req, res, next) => {
+import Article from './Article.model';
+
+export const checkArticle = async (req, res, next) => {
   try {
     const article = await Article.findById(req.params.id);
     if (!article) {

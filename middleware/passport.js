@@ -21,7 +21,7 @@ passport.use(new Strategy(async function (accessToken, done) {
 }));
 
 // 身份验证中间件
-const authenticate = function (req, res, next) {
+export const authenticate = function (req, res, next) {
   passport.authenticate('bearer', {session: false}, (err, user, info) => {
     if (err) {
       return next('err', err);
@@ -38,5 +38,3 @@ const authenticate = function (req, res, next) {
   })(req, res, next)
 }
 
-
-module.exports = {passport, authenticate}

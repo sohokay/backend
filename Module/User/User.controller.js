@@ -1,7 +1,7 @@
-const UserModel = require("./User.model");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const {JWT_SECRET} = require("../../const");
+import UserModel  from './User.model';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import {JWT_SECRET} from '../../const';
 
 // 生成访问令牌
 const generateAccessToken = (user) => {
@@ -69,12 +69,6 @@ export async function login(req, res, next) {
   });
 }
 
-export async function logout(req, res, next) {
-  req.user.accessToken = '';
-  req.user.save();
-  res.send({message: '注销成功'});
-}
-
 export async function changePassword(req, res, next) {
   const {oldPassword, newPassword} = req.body;
 
@@ -131,6 +125,3 @@ export async function getAll(req, res, next) {
   });
 }
 
-/*export async function protected(req, res) {
-  res.send({message: '您已通过身份验证'});
-}*/

@@ -1,4 +1,4 @@
-exports.upload = async (req, res) => {
+export const upload = async (req, res) => {
   /*对文件做处理 保存到./upload/目录下 */
 
   const { file } = req.files;

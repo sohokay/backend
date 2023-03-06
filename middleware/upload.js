@@ -14,7 +14,7 @@ exports.upload=upload;*/
 
 import formidable from 'formidable';
 
-exports.uploadFile = (req, res, next) => {
+export const uploadFile = (req, res, next) => {
   const form = formidable({ multiples: true });
 
   form.parse(req, (err, fields, files) => {
@@ -27,3 +27,5 @@ exports.uploadFile = (req, res, next) => {
     next();
   });
 };
+
+export default uploadFile;

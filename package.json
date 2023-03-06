@@ -4,7 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "serve": "nodemon -r @babel/register app.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
+    "serve": "nodemon app.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
+    "serve-bin": "nodemon bin.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -40,9 +41,11 @@
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.0",
     "@babel/node": "^7.20.7",
-    "@babel/preset-env": "^7.20.2"
+    "@babel/preset-env": "^7.20.2",
+    "uuid": "^9.0.0"
   },
   "devDependencies": {
 
-  }
+  },
+  "Type": "module"
 }

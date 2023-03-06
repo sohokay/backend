@@ -5,17 +5,13 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
 import passport from 'passport';
-
-
-
+import morgan from 'morgan';
 
 const app = express(); //create an express app object
-app.use(require('morgan')('combined')); //require morgan for logging
+app.use(morgan('combined')); //require morgan for logging
 mongoose.connect('mongodb://119.91.252.27/auth_demo_app'); //connect to database auth_demo_app
 
-
-
-import errorHandler from './middleware/errorHandler';
+import {errorHandler} from './middleware/errorHandler';
 app.use(passport.initialize()); //initializes passport
 // example of using a middleware
 app.use(function (req, res, next) {
@@ -29,14 +25,13 @@ app.use(express.static(__dirname + '/public')); //serves static files
 app.use(errorHandler); // 使用错误处理中间件
 
 import usersRouter from './Module/User/User.route';
-// import articlesRouter  from './Module/Article/Article.route';
-// import albumsRouter from './Module/Album/Album.route';
-// import commonRouter  from './Module/Common/Common.route';
+import articlesRouter  from './Module/Article/Article.route';
+import albumsRouter from './Module/Album/Album.route';
+import commonRouter  from './Module/Common/Common.route';
 app.use('/user', usersRouter);
-// app.use('/article', articlesRouter);
-// app.use('/album', albumsRouter);
-// app.use('/common', commonRouter);
-
+app.use('/article', articlesRouter);
+app.use('/album', albumsRouter);
+app.use('/common', commonRouter);
 
 const config = process.argv.reduce((prev, next, index, arr) => {
   if (index > 1) {

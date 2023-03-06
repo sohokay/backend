@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const {generateUUID} = require("../../middleware/uuid");
+import mongoose from 'mongoose';
+import {generateUUID} from '../../middleware/uuid';
 const AlbumSchema = new mongoose.Schema(
     {
       _id: {type: String, default: generateUUID(),},
@@ -29,5 +29,4 @@ AlbumSchema.pre('save', function (next) {
 });
 
 const Album = mongoose.model('Album', AlbumSchema);
-
-module.exports = Album;
+export default Album;

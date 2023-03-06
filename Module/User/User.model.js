@@ -1,7 +1,7 @@
 // Path: models/User.model.js
-const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const {generateUUID} = require("../../middleware/uuid");
+import mongoose from 'mongoose';
+import bcrypt from 'bcrypt';
+import {generateUUID} from '../../middleware/uuid';
 const UserSchema = new mongoose.Schema({
   _id: {type: String, default: generateUUID()},
   username: {type: String, unique: true, required: true},
@@ -30,4 +30,5 @@ UserSchema.methods.comparePassword = function (candidatePassword, callback) {
     callback(null, isMatch);
   });
 };
-module.exports = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
+export default User;

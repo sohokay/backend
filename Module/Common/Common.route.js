@@ -1,11 +1,11 @@
-const express = require('express');
+import express from 'express';
 // const upload = require("../../middleware/upload");
-const CommonController = require('./Common.controller');
-const {authenticate} = require("../../middleware/passport");
-const {uploadFile} = require("../../middleware/upload");
+import {upload} from './Common.controller';
+import {authenticate} from '../../middleware/passport';
+import {uploadFile} from '../../middleware/upload';
 
 const router = express.Router();
 
-router.post('/upload',authenticate ,uploadFile,  (req, res, next) => CommonController.upload(req, res, next));
+router.post('/upload',authenticate ,uploadFile,  (req, res, next) => upload(req, res, next));
 
-module.exports = router;
+export default router;

@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const {generateUUID} = require("../../middleware/uuid");
+import mongoose from 'mongoose';
+import {generateUUID} from '../../middleware/uuid';
 const ArticleSchema = new mongoose.Schema({
   _id: {type: String, default: generateUUID()},
   title: {type: String, required: true},
@@ -20,5 +20,6 @@ ArticleSchema.pre('save', function (next) {
 
   next();
 });
+const Article = mongoose.model('Article', ArticleSchema);
 
-module.exports = mongoose.model('Article', ArticleSchema);
+export default Article;
