@@ -1,44 +1,52 @@
+
 /*express app.js*/
-const compression = require('compression') //Compress all routes
-const express = require('express'); //require express module
+import compression from 'compression';
+import express from 'express';
+import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
+import passport from 'passport';
+
+
+
+
 const app = express(); //create an express app object
 app.use(require('morgan')('combined')); //require morgan for logging
-const bodyParser = require('body-parser'); //require body-parser for parsing form data
-const mongoose = require('mongoose'); //require mongoose for database
 mongoose.connect('mongodb://119.91.252.27/auth_demo_app'); //connect to database auth_demo_app
-const {passport} = require('./middleware/passport');
+
+
+
+import errorHandler from './middleware/errorHandler';
 app.use(passport.initialize()); //initializes passport
 // example of using a middleware
 app.use(function (req, res, next) {
-  console.log('I run for all routes');
+  console.log('req', req.method, req.url, req.body);
   next();
 });
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json()); //parse application/json
-
 app.use(compression()); //Compress all routes
 app.use(express.static(__dirname + '/public')); //serves static files
-const usersRouter = require('./routes/users');
+app.use(errorHandler); // 使用错误处理中间件
+
+import usersRouter from './Module/User/User.route';
+// import articlesRouter  from './Module/Article/Article.route';
+// import albumsRouter from './Module/Album/Album.route';
+// import commonRouter  from './Module/Common/Common.route';
 app.use('/user', usersRouter);
-app.get('/api', isLoggedIn, function (req, res) {
-  res.json({
-    message: 'Welcome to the coolest API on earth!'
-  });
-})
+// app.use('/article', articlesRouter);
+// app.use('/album', albumsRouter);
+// app.use('/common', commonRouter);
 
-function isLoggedIn(req, res, next) {
-  console.log(req.isAuthenticated(),'req.isAuthenticated()');
-  if (req.isAuthenticated()) {
-    return next();
+
+const config = process.argv.reduce((prev, next, index, arr) => {
+  if (index > 1) {
+    const arr = next.split('=');
+    prev[arr[0]] = arr[1];
   }
-  res.json({
-    message: "You need to be logged in to see this."
-  });
-}
-
-app.listen(process.env.PORT || 3000, '', function () {
+  return prev;
+}, {});
+global.config = config;
+app.listen(global.config.PORT || 3000, '', function () {
   console.log('Server has started');
-
-
 });
 

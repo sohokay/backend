@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "serve": "nodemon app.js PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
+    "serve": "nodemon -r @babel/register app.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,15 +22,27 @@
     "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "compression": "^1.7.4",
+    "cors": "^2.8.5",
+    "esm": "^3.2.25",
     "express": "^4.18.2",
     "express-session": "^1.17.3",
+    "formidable": "^3.2.5",
     "jsonwebtoken": "^9.0.0",
-    "mongoose": "^6.9.3",
+    "mongoose": "^6.10.1",
+    "mongoose-sequence": "^5.3.1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.20",
+    "multer": "2.0.0-rc.4",
+    "nodemon": "^2.0.21",
     "passport": "^0.6.0",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^7.1.2"
+    "passport-local-mongoose": "^7.1.2",
+    "@babel/cli": "^7.21.0",
+    "@babel/core": "^7.21.0",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2"
+  },
+  "devDependencies": {
+
   }
 }

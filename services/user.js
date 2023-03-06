@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const User = require('../Module/User/User.model');
 
 // 定义用户相关的服务
 function getAllUsers() {
