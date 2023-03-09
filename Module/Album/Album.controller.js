@@ -1,7 +1,7 @@
 // albumController.js
 
-import Album from './Album.model';
-import Article from '../Article/Article.model';
+import Album from './Album.model.js';
+import Article from '../Article/Article.model.js';
 
 // 创建专辑
 export const createAlbum = async (req, res) => {

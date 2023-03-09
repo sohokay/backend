@@ -1,8 +1,8 @@
 import express from 'express';
 
 const router = express.Router();
-import {authenticate} from '../../middleware/passport';
-import {register, login, changePassword, deleteAll, getAll} from './User.controller';
+import {authenticate} from '../../middleware/passport.js';
+import {register, login, changePassword, deleteAll, getAll} from './User.controller.js';
 
 router.post('/register', (req, res, next) => register(req, res, next));
 

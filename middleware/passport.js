@@ -1,12 +1,13 @@
 import passport  from 'passport'
-import User  from '../Module/User/User.model'
+import User  from '../Module/User/User.model.js'
 import jwt from 'jsonwebtoken'
-import {JWT_SECRET} from '../const'
+import JWT_SECRET from '../const.js'
 import {Strategy} from 'passport-http-bearer'
 
 passport.use(new Strategy(async function (accessToken, done) {
   try {
     const decoded = jwt.verify(accessToken, JWT_SECRET);
+    console.log(decoded);
     const user = await User.findById(decoded._id)
     if (!user) return done(null, false);
 

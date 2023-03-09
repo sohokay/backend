@@ -13,12 +13,21 @@ exports.upload=upload;*/
 
 
 import formidable from 'formidable';
+import path from "path";
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname)
+console.log('__dirname',__dirname);
 export const uploadFile = (req, res, next) => {
-  const form = formidable({ multiples: true });
-
+  console.log('path.dirname',path.resolve(path.dirname(new URL(import.meta.url).pathname)));
+  console.log('process.cwd()',process.cwd());
+  const form = formidable({
+    multiples: true,
+    uploadDir: path.resolve(path.join(process.cwd(), '/uploads')),
+    keepExtensions: true
+  });
   form.parse(req, (err, fields, files) => {
     if (err) {
+      console.log(err);
       return next(err);
     }
 

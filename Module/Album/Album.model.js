@@ -1,8 +1,8 @@
 import mongoose from 'mongoose';
-import {generateUUID} from '../../middleware/uuid';
+import generateUUID from '../../middleware/uuid.js';
 const AlbumSchema = new mongoose.Schema(
     {
-      _id: {type: String, default: generateUUID(),},
+      // _id: {type: String, default: generateUUID(),},
       name: {type: String, required: true,},
       coverImage: {type: String, required: true,},
       createdBy: {type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true,},

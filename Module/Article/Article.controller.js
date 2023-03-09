@@ -1,12 +1,12 @@
-const Article = require('./Article.model');
+import Article from "./Article.model.js";
+import mongoose from "mongoose";
 
-
-exports.create = async (req, res) => {
+const create = async (req, res) => {
   try {
     const article = new Article({
       title: req.body.title,
       content: req.body.content,
-      author: req.user._id
+      author:  req.user._id,
     });
     await article.save();
     res.status(201).json(article);
@@ -15,7 +15,7 @@ exports.create = async (req, res) => {
   }
 };
 
-exports.getAll = async (req, res) => {
+const getAll = async (req, res) => {
   try {
     const userId = req.user._id
     const articles = await Article.find({author: userId})
@@ -27,7 +27,7 @@ exports.getAll = async (req, res) => {
   }
 };
 
-exports.getById = async (req, res) => {
+const getById = async (req, res) => {
   try {
     const article = await Article.findById(req.params.id).populate('author');
     if (!article) {
@@ -39,7 +39,7 @@ exports.getById = async (req, res) => {
   }
 };
 
-exports.updateById = async (req, res) => {
+const updateById = async (req, res) => {
   try {
     const article = req.article;
     article.title = req.body.title;
@@ -52,7 +52,7 @@ exports.updateById = async (req, res) => {
   }
 };
 
-exports.deleteById = async (req, res) => {
+const deleteById = async (req, res) => {
   try {
     const article = req.article;
     const author = article.author;
@@ -62,3 +62,12 @@ exports.deleteById = async (req, res) => {
     res.status(500).json({message: error.message});
   }
 };
+
+export default {
+  create,
+  getAll,
+  getById,
+  updateById,
+  deleteById
+
+}

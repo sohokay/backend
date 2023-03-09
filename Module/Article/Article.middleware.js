@@ -1,5 +1,5 @@
 // 查找是否存在和鉴权 统一处理
-import Article from './Article.model';
+import Article from './Article.model.js';
 
 export const checkArticle = async (req, res, next) => {
   try {

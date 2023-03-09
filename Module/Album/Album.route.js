@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import {createAlbum, getAllAlbums, getAlbumById, updateAlbum, deleteAlbum, addArticleToAlbum} from './Album.controller';
+import {createAlbum, getAllAlbums, getAlbumById, updateAlbum, deleteAlbum, addArticleToAlbum} from './Album.controller.js';
 
-import { authenticate } from '../../middleware/passport';
+import { authenticate } from '../../middleware/passport.js';
 
 // 创建专辑
 router.post('/', authenticate, createAlbum);

@@ -1,9 +1,9 @@
 // Path: models/User.model.js
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import {generateUUID} from '../../middleware/uuid';
+import {generateUUID} from '../../middleware/uuid.js';
 const UserSchema = new mongoose.Schema({
-  _id: {type: String, default: generateUUID()},
+  // _id: {type: String, default: generateUUID()},
   username: {type: String, unique: true, required: true},
   password: {type: String, required: true},
   created_at: {type: Date, default: Date.now},

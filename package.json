@@ -47,5 +47,5 @@
   "devDependencies": {
 
   },
-  "Type": "module"
+  "type": "module"
 }

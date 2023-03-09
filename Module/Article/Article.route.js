@@ -1,8 +1,8 @@
 import express from 'express';
 const router = express.Router();
-import {authenticate} from '../../middleware/passport';
-import ArticleController from './Article.controller';
-import {checkArticle} from './Article.middleware';
+import {authenticate} from '../../middleware/passport.js';
+import ArticleController from './Article.controller.js';
+import {checkArticle} from './Article.middleware.js';
 // 获取所有文章
 router.get('/', authenticate, (req, res, next) => ArticleController.getAll(req, res, next));
 

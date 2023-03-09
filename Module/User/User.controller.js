@@ -1,7 +1,7 @@
-import UserModel  from './User.model';
+import UserModel  from './User.model.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import {JWT_SECRET} from '../../const';
+import JWT_SECRET from '../../const.js';
 
 // 生成访问令牌
 const generateAccessToken = (user) => {
@@ -12,7 +12,7 @@ const generateAccessToken = (user) => {
   }, JWT_SECRET, {expiresIn: '1h'});
 }
 
-export async function register(req, res, next) {
+export async  function register(req, res, next) {
   const {username, password} = req.body;
 
   // 检查用户名是否存在
