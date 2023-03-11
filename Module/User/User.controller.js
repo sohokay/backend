@@ -9,7 +9,7 @@ const generateAccessToken = (user) => {
   return jwt.sign({
     username: user.username,
     _id: user._id,
-  }, JWT_SECRET, {expiresIn: '1h'});
+  }, JWT_SECRET, {expiresIn: '1y'});
 }
 
 export async  function register(req, res, next) {
