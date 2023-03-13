@@ -6,10 +6,13 @@ import mongoose from 'mongoose';
 import passport from 'passport';
 import morgan from 'morgan';
 import path from "path";
+import cors from 'cors';
 
 console.log('compression', compression);
 const app = express(); //create an express app object
+app.use(cors()); //use cors
 app.use(morgan('combined')); //require morgan for logging
+mongoose.set('strictQuery', false); //allow query without schema
 mongoose.connect('mongodb://119.91.252.27/auth_demo_app'); //connect to database auth_demo_app
 
 import errorHandler from './middleware/errorHandler.js';

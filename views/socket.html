@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<button class="join_ming">小明加入游戏</button>
+<button class="join_hong">小红加入游戏</button>
+<button class="join_jun">小军加入游戏</button>
+<button>建立连接</button>
+<button>发消息</button>
+<div class="textare">
+
+</div>
+<script src="../node_modules/socket.io-client/dist/socket.io.js"></script>
+<script>
+	// const { io } = require("socket.io-client");
+	// import {io} from "socket.io-client";
+	
+	var socket = io("http://127.0.0.1:3001");
+	socket.on("connect", () => {
+		console.log("连接成功");
+		appendMsg("连接成功");
+	});
+	socket.on('players', (data) => {
+		console.log(data);
+		appendMsg(data);
+	})
+	socket.on("disconnect", () => {
+		console.log("连接断开");
+	});
+	socket.on("reconnect", () => {
+		console.log("重连成功");
+	});
+	socket.on('connected', (data) => {
+		console.log(data);
+	});
+	socket.on("message", (data) => {
+		console.log(data);
+	});
+	
+	socket.on("connect_error", (err) => {
+		console.log(err);
+	});
+	
+	socket.on("connect_timeout", (err) => {
+		console.log(err);
+	});
+	
+	
+	document.querySelector(".join_ming").onclick = function () {
+		socket.emit("join", {
+			name: '小明',
+			balance: 1000
+		}, (data) => {
+			console.log(data);
+		});
+	};
+	
+	document.querySelector(".join_hong").onclick = function () {
+		socket.emit("join", {
+			name: '小红',
+			balance: 1000
+		});
+	};
+	
+	document.querySelector(".join_jun").onclick = function () {
+		socket.emit("join", {
+			name: '小军',
+			balance: 1000
+		});
+	};
+	
+	function appendMsg(msg) {
+		const div = document.createElement("div");
+		div.innerHTML = msg;
+		document.querySelector(".textare").appendChild(div);
+	}
+</script>
+</body>
+</html>
