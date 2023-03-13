@@ -31,11 +31,15 @@ import usersRouter from './Module/User/User.route.js';
 import articlesRouter from './Module/Article/Article.route.js';
 import albumsRouter from './Module/Album/Album.route.js';
 import commonRouter from './Module/Common/Common.route.js';
+import gameRouter from './Module/Game/Game.route.js';
+import _21Router from './Module/Game/21/21.route.js';
 
 app.use('/user', usersRouter);
 app.use('/article', articlesRouter);
 app.use('/album', albumsRouter);
 app.use('/common', commonRouter);
+app.use('/game/21', _21Router);
+app.use('/game', gameRouter);
 
 const config = process.argv.reduce((prev, next, index, arr) => {
   if (index > 1) {
