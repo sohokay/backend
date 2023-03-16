@@ -20,3 +20,10 @@ sudo systemctl restart kibana.service
 # 外网不能访问时 修改配置文件 /etc/kibana/kibana.yml host为0.0.0.0
 
 /kibana /etc/kibana/kibana.yml
+
+###############
+curl -O https://artifacts.elastic.co/downloads/kibana/kibana-8.6.2-linux-x86_64.tar.gz
+tar -xzf kibana-8.6.2-linux-x86_64.tar.gz -C /opt/
+cd ./kibana-8.6.2
+
+chown -R es ./kibana-8.6.2

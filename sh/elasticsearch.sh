@@ -65,3 +65,24 @@ mv /opt/elasticsearch-${ES_VERSION} /opt/elasticsearch
 systemctl daemon-reload
 systemctl enable elasticsearch.service
 systemctl start elasticsearch.service
+
+
+
+
+#######################
+yum update -y
+yum install -y wget
+yum install -y curl
+yum install -y tar
+yum install -y java-11-openjdk
+curl -L  https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz -o /tmp/elasticsearch.tar.gz
+curl -O https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.6.2-linux-x86_64.tar.gz
+tar -zxvf elasticsearch-8.6.2-linux-x86_64.tar.gz -C /opt/
+cd ./elasticsearch-8.6.2
+
+adduser es
+passwd ****
+chown -R es ./elasticsearch-8.6.2
+chown -R es /var /usr /run
+
+su es

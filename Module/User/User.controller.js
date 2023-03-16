@@ -18,6 +18,7 @@ export async  function register(req, res, next) {
   // 检查用户名是否存在
   UserModel.findOne({username}, (err, existingUser) => {
     if (err) {
+      console.log(1);
       return res.status(500).send({message: '注册时发生错误'});
     }
     if (existingUser) {
@@ -26,11 +27,13 @@ export async  function register(req, res, next) {
 
     bcrypt.hash(password, 10, (err, hashedPassword) => {
       if (err) {
+        console.log(2);
         return res.status(500).send({message: '注册时发生错误'});
       }
       const user = new UserModel({username, password: hashedPassword});
       user.save((err) => {
         if (err) {
+          console.log(3);
           return res.status(500).send({message: '注册时发生错误'});
         }
         // 创建访问令牌
