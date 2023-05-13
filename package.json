@@ -2,9 +2,9 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "code/app.js",
   "scripts": {
-    "serve": "nodemon app.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
+    "serve": "nodemon code/app.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
     "serve-bin": "nodemon bin.js --PORT=3000 MONGODB_URI=mongodb://localhost:27017/sohokay DB_NAME=sohokay SECRET=sohokay IP=0.0.0.0",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
