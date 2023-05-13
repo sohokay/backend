@@ -19,7 +19,7 @@ import errorHandler from './middleware/errorHandler.js';
 
 app.use(passport.initialize()); //initializes passport
 // example of using a middleware
-app.use(function (req, res, next) {
+app.use(function (req, res , next) {
   console.log('req', req.method, req.url, req.body);
   next();
 });
@@ -43,6 +43,14 @@ app.use('/album', albumsRouter);
 app.use('/common', commonRouter);
 app.use('/game/21', _21Router);
 app.use('/game', gameRouter);
+app.get('*', (req, res) => {
+  res.send('Hello World!');
+} );
+
+
+
+
+
 
 const config = process.argv.reduce((prev, next, index, arr) => {
   if (index > 1) {
