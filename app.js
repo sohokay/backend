@@ -15,7 +15,7 @@ app.use(morgan('combined')); //require morgan for logging
 mongoose.set('strictQuery', false); //allow query without schema
 mongoose.connect('mongodb://119.91.252.27/auth_demo_app'); //connect to database auth_demo_app
 
-import errorHandler from '../middleware/errorHandler.js';
+import errorHandler from './middleware/errorHandler.js';
 
 app.use(passport.initialize()); //initializes passport
 // example of using a middleware
@@ -30,12 +30,12 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname); // 用 import
 app.use(express.static(__dirname + '/public')); //serves static files
 app.use(errorHandler); // 使用错误处理中间件
 
-import usersRouter from '../Module/User/User.route.js';
-import articlesRouter from '../Module/Article/Article.route.js';
-import albumsRouter from '../Module/Album/Album.route.js';
-import commonRouter from '../Module/Common/Common.route.js';
-import gameRouter from '../Module/Game/Game.route.js';
-import _21Router from '../Module/Game/21/21.route.js';
+import usersRouter from './Module/User/User.route.js';
+import articlesRouter from './Module/Article/Article.route.js';
+import albumsRouter from './Module/Album/Album.route.js';
+import commonRouter from './Module/Common/Common.route.js';
+import gameRouter from './Module/Game/Game.route.js';
+import _21Router from './Module/Game/21/21.route.js';
 
 app.use('/user', usersRouter);
 app.use('/article', articlesRouter);
