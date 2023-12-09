@@ -23,7 +23,7 @@ io.on('connection', (socket) => {
 
   // 加入游戏
   socket.on('join', (data) => {
-    const player = new Player(data.name);
+    const player = new Player(data.name,data.balance);
     game.addPlayer(player);
     socket.player = player;
     console.log(`Player ${player.name} joined the game.`);
@@ -58,6 +58,11 @@ io.on('connection', (socket) => {
   socket.on('stand', () => {
     socket.player.stand();
     io.emit('player-stood', {name: socket.player.name});
+  });
+
+  socket.on('check', () => {
+    // 列出所有玩家信息并返回
+    io.emit('players', game.players);
   });
 
   // 断开连接

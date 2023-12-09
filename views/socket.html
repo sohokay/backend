@@ -8,6 +8,7 @@
 <button class="join_ming">小明加入游戏</button>
 <button class="join_hong">小红加入游戏</button>
 <button class="join_jun">小军加入游戏</button>
+<button class="check_players">查看玩家</button>
 <button>建立连接</button>
 <button>发消息</button>
 <div class="textare">
@@ -24,6 +25,10 @@
 		appendMsg("连接成功");
 	});
 	socket.on('players', (data) => {
+		console.log(data);
+		appendMsg(data);
+	})
+	socket.on('player-joined',(data)=>{
 		console.log(data);
 		appendMsg(data);
 	})
@@ -69,6 +74,12 @@
 		socket.emit("join", {
 			name: '小军',
 			balance: 1000
+		});
+	};
+	
+	document.querySelector(".check_players").onclick = function () {
+		socket.emit("check", (data) => {
+			console.log(data);
 		});
 	};
 	

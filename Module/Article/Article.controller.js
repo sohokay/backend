@@ -1,6 +1,7 @@
 import Article from "./Article.model.js";
 import mongoose from "mongoose";
 
+
 const create = async (req, res) => {
   try {
     const article = new Article({
