@@ -2,3 +2,4 @@
 /package-lock.json
 .idea/
 /pnpm-lock.yaml
+.vscode/
