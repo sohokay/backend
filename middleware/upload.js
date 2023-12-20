@@ -1,7 +1,6 @@
 import formidable from 'formidable';
 import path from "path";
-
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
+import __dirname from '../utils/dirname.js';
 console.log('__dirname',__dirname);
 export const uploadFile = (req, res, next) => {
   console.log('path.dirname',path.resolve(path.dirname(new URL(import.meta.url).pathname)));
