@@ -3,6 +3,7 @@ import compression from 'compression';
 import express from 'express';
 import bodyParser from 'body-parser';
 import mongoose from 'mongoose';
+import pkg from 'pg'
 import passport from 'passport';
 import morgan from 'morgan';
 import path from "path";
@@ -23,14 +24,32 @@ const swaggerOptions = {
 };
 const openapiSpecification = swaggerJsdoc(swaggerOptions);
 // 根据环境变量加载不同的环境变量文件
-const envFile = path.join(__dirname,`/./.env.${process.env.NODE_ENV}`);
+// const envFile = path.join(__dirname,`/./.env.${process.env.NODE_ENV}`);
 console.log('envFile', envFile);
-// dotenv.config({path: envFile});
+dotenv.config({path: envFile});
 // dotenv.config({path: path.join(__dirname, '/./.env.development')});
-dotenv.config({path: path.join(__dirname, '/./.env')});
+dotenv.config({path: path.join(__dirname, '/./.env.development')});
 // console.log('dotenv', dotenv);
 // console.log('process.env', process.env);
 console.log('compression', compression);
+
+const {Pool } = pkg;
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL + "?sslmode=require",
+})
+console.log('pool', pool);
+
+// const pgClient = new Client({
+//   user: process.env.POSTGRES_USER,
+//   host: process.env.POSTGRES_HOST,
+//   database: process.env.POSTGRES_DATABASE,
+//   password: process.env.POSTGRES_PASSWORD,
+// });
+
+
+
+
+
 const app = express(); //create an express app object
 app.use(cors()); //use cors
 app.use(morgan('combined')); //require morgan for logging

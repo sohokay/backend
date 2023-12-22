@@ -4,6 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "serve:dev": "cross-env NODE_ENV=development nodemon app.js",
     "serve:test": "cross-env NODE_ENV=test nodemon app.js",
     "serve:prod": "cross-env NODE_ENV=production nodemon app.js",
@@ -47,6 +48,7 @@
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^7.1.2",
+    "pg": "^8.11.3",
     "request": "^2.88.2",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
