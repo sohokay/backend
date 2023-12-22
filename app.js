@@ -25,8 +25,8 @@ const swaggerOptions = {
 const openapiSpecification = swaggerJsdoc(swaggerOptions);
 // 根据环境变量加载不同的环境变量文件
 // const envFile = path.join(__dirname,`/./.env.${process.env.NODE_ENV}`);
-console.log('envFile', envFile);
-dotenv.config({path: envFile});
+// console.log('envFile', envFile);
+// dotenv.config({path: envFile});
 // dotenv.config({path: path.join(__dirname, '/./.env.development')});
 dotenv.config({path: path.join(__dirname, '/./.env.development')});
 // console.log('dotenv', dotenv);
